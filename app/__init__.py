@@ -10,6 +10,24 @@ load_dotenv()
 #crear instancia
 app =  Flask(__name__)
 
+# Configuración de la base de datos PostgreSQL
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+#importar models
+from app.models.post import Post
+from app.models.category import Category
+# Importar blueprints
+from app.routes.post import post_bp
+
+with app.app_context():
+    # Crear las tablas en la base de datos
+    db.create_all()
+
+# Registrar blueprints
+app.register_blueprint(post_bp, url_prefix='/posts')
+
 #ruta principal
 @app.route('/')
 def index():
