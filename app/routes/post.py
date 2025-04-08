@@ -36,6 +36,7 @@ def delete_post(id):
         db.session.commit()
     return redirect(url_for('posts.list_posts'))
 
+#modificar posts
 @post_bp.route('/post/update/<int:id>', methods=['GET','POST'])
 def update_post(id):
     post = Post.query.get(id)
