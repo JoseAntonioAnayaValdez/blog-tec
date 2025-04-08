@@ -20,6 +20,7 @@ from app.models.post import Post
 from app.models.category import Category
 # Importar blueprints
 from app.routes.post import post_bp
+from app.routes.category import cat_bp
 
 with app.app_context():
     # Crear las tablas en la base de datos
@@ -27,6 +28,10 @@ with app.app_context():
 
 # Registrar blueprints
 app.register_blueprint(post_bp, url_prefix='/posts')
+
+# Registrar blueprints
+app.register_blueprint(cat_bp, url_prefix='/cat')
+
 
 #ruta principal
 @app.route('/')
