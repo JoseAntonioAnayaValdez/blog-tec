@@ -28,13 +28,13 @@
                         <div class="card-footer">
                             <div class="card-footer-item">
                                 <div class="buttons">
-                                    <a href="" class="button is-danger">
+                                    <a href="{{ url_for('cat.delete_category', id = category.id )}}" class="button is-danger">
                                         <span class="icon">
                                             <i class="fa-solid fa-trash"></i>
                                         </span>
                                         <span>Eliminar</span>
                                     </a>
-                                    <a href="" class="button is-link">
+                                    <a href="{{ url_for('cat.update_category', id = category.id )}}" class="button is-link">
                                         <span class="icon">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </span>

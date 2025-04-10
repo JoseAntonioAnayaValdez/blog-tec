@@ -18,31 +18,30 @@ def create_category():
 
         db.session.add(new_category)
         db.session.commit()
-
         return redirect(url_for('cat.list_category'))
     
     # Aqui sigue si es GET
     categories = Category.query.all()
     return render_template('category/create_category.html', categories=categories)
 
-# @post_bp.route('/posts/delete/<int:id>')
-# def delete_post(id):
-#     post = Post.query.get(id)
-#     if post:
-#         db.session.delete(post)
-#         db.session.commit()
-#     return redirect(url_for('posts.list_posts'))
+@cat_bp.route('/cat/delete/<int:id>')
+def delete_category(id):
+    categories = Category.query.get(id)
+    if categories:
+        db.session.delete(categories)
+        db.session.commit()
+    return redirect(url_for('cat.list_category'))
 
-# #modificar posts
-# @post_bp.route('/post/update/<int:id>', methods=['GET','POST'])
-# def update_post(id):
-#     post = Post.query.get(id)
-#     if request.method == 'POST':
-#         post.title = request.form['title']
-#         post.category_id = request.form['category_id']
-#         post.content = request.form['content']
-#         db.session.commit()
-#         return redirect(url_for('posts.list_posts'))
+#modificar posts
+@cat_bp.route('/cat/update/<int:id>', methods=['GET','POST'])
+def update_category(id):
+    categories = Category.query.get(id)
+    if request.method == 'POST':
+        categories.name = request.form['name']
+        db.session.commit()
+        # flash('Category created successfully!', 'success')
+        return redirect(url_for('cat.list_category'))
     
-#     categories = Category.query.all()
-#     return render_template('post/update_post.html', post=post, categories=categories)
+    return render_template('category/update_category.html', category=categories)
+
+
