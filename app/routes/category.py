@@ -10,20 +10,20 @@ def list_category():
     categories = Category.query.all()
     return render_template('category/list_category.html', categories=categories)
 
-# @post_bp.route('/create', methods=['GET', 'POST'])
-# def create_category():
-#     if request.method == 'POST':
-#         name = request.form['name']
-#         new_category = Category(name = name)
+@cat_bp.route('/create', methods=['GET', 'POST'])
+def create_category():
+    if request.method == 'POST':
+        name = request.form['name']
+        new_category = Category(name = name)
 
-#         db.session.add(new_category)
-#         db.session.commit()
+        db.session.add(new_category)
+        db.session.commit()
 
-#         return redirect(url_for('posts.list_posts'))
+        return redirect(url_for('cat.list_category'))
     
-#     # Aqui sigue si es GET
-#     categories = Category.query.all()
-#     return render_template('post/createpost.html', categories=categories)
+    # Aqui sigue si es GET
+    categories = Category.query.all()
+    return render_template('category/create_category.html', categories=categories)
 
 # @post_bp.route('/posts/delete/<int:id>')
 # def delete_post(id):
